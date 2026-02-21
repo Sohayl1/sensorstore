@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENSOR STORE | لوحة التحكم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #111318;
+            color: #e5e7eb;
+            min-height: 100vh;
+            padding: 32px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* ===== الهيدر ===== */
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .header h1 i {
+            color: #3b82f6;
+            font-size: 2rem;
+            background: #1e2532;
+            padding: 12px;
+            border-radius: 18px;
+        }
+
+        .header p {
+            color: #9ca3af;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 8px;
+            margin-right: 70px;
+        }
+
+        /* ===== بطاقات الإحصائيات ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #1c212b;
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border: 1px solid #2f3542;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            background: #222834;
+            border-color: #3b82f6;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            background: #2f3542;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-size: 1.6rem;
+        }
+
+        .stat-content h4 {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .stat-content .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        /* ===== الكارد العام ===== */
+        .card {
+            background: #1c212b;
+            border-radius: 28px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #2f3542;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #3b82f6;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .card-header i {
+            font-size: 1.5rem;
+            color: #3b82f6;
+            background: #2f3542;
+            padding: 12px;
+            border-radius: 18px;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* ===== الفورم ===== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 16px 45px 16px 18px;
+            background: #2f3542;
+            border: 1.5px solid #3f4658;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            outline: none;
+            background: #353e4f;
+        }
+
+        input::placeholder {
+            color: #8e98a8;
+            font-weight: 400;
+        }
+
+        select option {
+            background: #2f3542;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 24px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-primary i {
+            font-size: 1.2rem;
+        }
+
+        /* ===== الجدول ===== */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            background: #1c212b;
+            border: 1px solid #2f3542;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            text-align: right;
+            padding: 18px 20px;
+            background: #2f3542;
+            color: #d1d5db;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #3f4658;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #2f3542;
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #2a313f;
+        }
+
+        .badge {
+            background: #2f3542;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            display: inline-block;
+            white-space: nowrap;
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 1px solid #3f4658;
+        }
+
+        .badge.phone {
+            background: #1e2b4a;
+            color: #90d2ff;
+            border-color: #3b82f6;
+            direction: ltr;
+        }
+
+        .badge.total {
+            background: #1a3a37;
+            color: #6cd4b2;
+            border-color: #10b981;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9ca3af;
+        }
+
+        .empty-state i {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+            color: #6b7280;
+        }
+
+        .empty-state h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d1d5db;
+            margin-bottom: 6px;
+        }
+
+        /* ===== PIN Overlay ===== */
+        .pin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 19, 24, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.25s;
+        }
+
+        .pin-card {
+            background: #1c212b;
+            border-radius: 40px;
+            padding: 48px;
+            text-align: center;
+            width: 440px;
+            border: 1px solid #3f4658;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .pin-card h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .pin-card p {
+            color: #9ca3af;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .pin-digits {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 32px 0;
+            direction: ltr;
+        }
+
+        .pin-digit {
+            width: 70px;
+            height: 80px;
+            background: #2f3542;
+            border: 2px solid #3f4658;
+            border-radius: 24px;
+            color: #ffffff;
+            font-size: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pin-input {
+            background: #2f3542;
+            border: 2px solid #3f4658;
+            border-radius: 60px;
+            padding: 18px 24px;
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 8px;
+            direction: ltr;
+            color: #ffffff;
+            font-weight: 700;
+            margin: 16px 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .pin-input:focus {
+            border-color: #3b82f6;
+            outline: none;
+            background: #353e4f;
+        }
+
+        .pin-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-top: 16px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .pin-btn:hover {
+            background: #2563eb;
+        }
+
+        .pin-error {
+            color: #f87171;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* ===== الفوتر ===== */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px;
+            color: #6b7280;
+            font-weight: 500;
+            border-top: 1px solid #2f3542;
+        }
+
+        .footer i {
+            margin: 0 6px;
+        }
+
+        /* ===== utility ===== */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PIN overlay -->
+<div id="pinOverlay" class="pin-overlay">
+    <div class="pin-card">
+        <h2>🔐 دخول آمن</h2>
+        <p>أدخل رمز PIN للوصول إلى لوحة التحكم</p>
+        <div class="pin-digits" id="pinDigitsDisplay">
+            <span class="pin-digit">*</span>
+            <span class="pin-digit">*</span>
+            <span class="pin-digit">*</span>
+            <span class="pin-digit">*</span>
+        </div>
+        <input type="password" id="pinInput" class="pin-input" maxlength="4" inputmode="numeric" placeholder="****" autofocus>
+        <button class="pin-btn" id="pinSubmitBtn">تأكيد</button>
+        <div id="pinError" class="pin-error"></div>
+    </div>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="container" id="mainContent" style="display: none;">
+    
+    <div class="header">
+        <h1>
+            <i class="fas fa-store-alt"></i>
+            SENSOR STORE
+        </h1>
+        <p>لوحة تحكم المتجر • إدارة المنتجات والطلبات</p>
+    </div>
+
+    <!-- الإحصائيات -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-box"></i></div>
+            <div class="stat-content">
+                <h4>إجمالي المنتجات</h4>
+                <div class="value" id="totalProducts">0</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+            <div class="stat-content">
+                <h4>طلبات اليوم</h4>
+                <div class="value" id="totalOrders">0</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-credit-card"></i></div>
+            <div class="stat-content">
+                <h4>الإيرادات</h4>
+                <div class="value" id="totalRevenue">0 ج.م</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بطاقة إضافة منتج -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-plus"></i>
+            <h3>إضافة منتج جديد</h3>
+        </div>
+        <form id="addProductForm">
+            <div class="form-grid">
+                <div class="input-group">
+                    <i class="fas fa-tag"></i>
+                    <input type="text" id="pName" placeholder="اسم المنتج" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-dollar-sign"></i>
+                    <input type="number" id="pPrice" placeholder="السعر (ج.م)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-layer-group"></i>
+                    <select id="pCategory" required>
+                        <option value="" disabled selected>اختر القسم</option>
+                        <option value="vbucks">🔫 شدات</option>
+                        <option value="pubg">🎮 حسابات ببجي</option>
+                        <option value="playstation">🎯 حسابات سوني</option>
+                        <option value="cards">💳 بطاقات شحن</option>
+                        <option value="xbox">❎ حسابات إكس بوكس</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-image"></i>
+                    <input type="url" id="pImage" placeholder="رابط الصورة" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">
+                <i class="fas fa-save"></i>
+                حفظ المنتج
+            </button>
+        </form>
+    </div>
+
+    <!-- بطاقة الطلبات -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>الطلبات الواردة</h3>
+        </div>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>التاريخ</th>
+                        <th>العميل</th>
+                        <th>رقم الهاتف</th>
+                        <th>الإجمالي</th>
+                        <th>المنتجات</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <tr class="empty-state">
+                        <td colspan="5">
+                            <i class="fas fa-inbox"></i>
+                            <h4>لا توجد طلبات</h4>
+                            <p>ستظهر الطلبات هنا عند وصولها</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <i class="fas fa-code"></i> SENSOR STORE | جميع الحقوق محفوظة 2026
+    </div>
+</div>
+
+<script type="module">
+    // ========== PIN 4231 ==========
+    const CORRECT_PIN = "4231";
+    const pinOverlay = document.getElementById('pinOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const pinInput = document.getElementById('pinInput');
+    const pinSubmit = document.getElementById('pinSubmitBtn');
+    const pinError = document.getElementById('pinError');
+    const pinDigits = document.getElementById('pinDigitsDisplay').children;
+
+    function updatePinDisplay() {
+        const val = pinInput.value;
+        for (let i = 0; i < 4; i++) {
+            if (i < val.length) {
+                pinDigits[i].textContent = '●';
+                pinDigits[i].style.color = '#3b82f6';
+            } else {
+                pinDigits[i].textContent = '*';
+                pinDigits[i].style.color = '#9ca3af';
+            }
+        }
+    }
+    pinInput.addEventListener('input', updatePinDisplay);
+
+    function unlock() {
+        if (pinInput.value === CORRECT_PIN) {
+            pinOverlay.style.opacity = '0';
+            setTimeout(() => {
+                pinOverlay.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, 250);
+        } else {
+            pinError.textContent = '❌ رمز PIN غير صحيح';
+            pinInput.value = '';
+            updatePinDisplay();
+            pinInput.focus();
+        }
+    }
+
+    pinSubmit.addEventListener('click', unlock);
+    pinInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') unlock();
+    });
+
+    // ========== Firebase ==========
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, orderBy, query, onSnapshot } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyARH0oK9x2H44ojG4EA1iY77_t_VCbT4ng",
+        authDomain: "sensorstore-5dd9c.firebaseapp.com",
+        projectId: "sensorstore-5dd9c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const addForm = document.getElementById('addProductForm');
+    const ordersBody = document.getElementById('ordersTableBody');
+    const totalProductsEl = document.getElementById('totalProducts');
+    const totalOrdersEl = document.getElementById('totalOrders');
+    const totalRevenueEl = document.getElementById('totalRevenue');
+
+    // إضافة منتج
+    addForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = addForm.querySelector('button');
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+        btn.disabled = true;
+
+        const product = {
+            name: document.getElementById('pName').value,
+            price: Number(document.getElementById('pPrice').value),
+            category: document.getElementById('pCategory').value,
+            image: document.getElementById('pImage').value,
+            createdAt: new Date()
+        };
+
+        try {
+            await addDoc(collection(db, "products"), product);
+            alert('✅ تمت الإضافة بنجاح');
+            e.target.reset();
+            updateStats();
+        } catch (error) {
+            alert('❌ حدث خطأ');
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    });
+
+    // استماع للطلبات
+    function subscribeOrders() {
+        const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                ordersBody.innerHTML = `<tr class="empty-state"><td colspan="5"><i class="fas fa-inbox"></i><h4>لا توجد طلبات</h4><p>ستظهر الطلبات هنا</p></td></tr>`;
+                totalOrdersEl.textContent = '0';
+                totalRevenueEl.textContent = '0';
+                return;
+            }
+
+            let html = '';
+            let orderCount = 0;
+            let revenue = 0;
+
+            snapshot.forEach(doc => {
+                const order = doc.data();
+                const date = order.createdAt ? new Date(order.createdAt.toDate()).toLocaleDateString('ar-EG', { 
+                    day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' 
+                }) : '—';
+                
+                const items = order.items ? order.items.map(i => i.name).join(' • ') : 'منتجات متنوعة';
+                orderCount++;
+                revenue += order.totalAmount || 0;
+
+                html += `<tr>
+                    <td>${date}</td>
+                    <td>${order.customerName || 'عميل'}</td>
+                    <td><span class="badge phone">${order.phone || '—'}</span></td>
+                    <td><span class="badge total">${order.totalAmount?.toLocaleString() || 0} ج.م</span></td>
+                    <td><span class="badge" title="${items}">${items}</span></td>
+                </tr>`;
+            });
+
+            ordersBody.innerHTML = html;
+            totalOrdersEl.textContent = orderCount;
+            totalRevenueEl.textContent = revenue.toLocaleString() + ' ج.م';
+        });
+    }
+
+    async function updateStats() {
+        try {
+            const snap = await getDocs(collection(db, "products"));
+            totalProductsEl.textContent = snap.size;
+        } catch (e) {}
+    }
+
+    // مراقب ظهور المحتوى
+    const observer = new MutationObserver(() => {
+        if (mainContent.style.display === 'block') {
+            subscribeOrders();
+            updateStats();
+            observer.disconnect();
+        }
+    });
+    observer.observe(mainContent, { attributes: true, attributeFilter: ['style'] });
+
+    // تحديث دوري
+    setInterval(() => {
+        if (mainContent.style.display === 'block') updateStats();
+    }, 30000);
+</script>
+
+</body>
+</html>
