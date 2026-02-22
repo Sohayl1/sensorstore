@@ -56,14 +56,6 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <div class="announcement-bar">
-        <div class="container">
-            <p>
-                <i class="fas fa-bolt"></i>
-                توصيل فوري خلال 5 دقائق - حسابات - بطاقات شحن
-            </p>
-        </div>
-    </div>
 
     <nav class="navbar">
         <div class="container nav-content">
@@ -73,6 +65,12 @@
 
             <div class="nav-center">
                 <a href="#" class="nav-link" onclick="goHome()">الرئيسية</a>
+<div class="region-switcher" style="margin: 0 15px;">
+    <select id="regionSelect" onchange="changeRegion(this.value)" style="background: rgba(20, 20, 28, 0.8); color: white; border: 1px solid #8a2be2; border-radius: 10px; padding: 8px 15px; cursor: pointer; font-family: 'El Messiri', sans-serif; outline: none; font-weight: bold;">
+        <option value="eg">🇪🇬 مصر (EGP)</option>
+        <option value="global">🌍 Global (USD)</option>
+    </select>
+</div>
 <div class="search-box">
     <input type="text" id="searchInput" placeholder="ابحث عن منتج..." onkeyup="searchProducts()" style="font-family: 'El Messiri', sans-serif;">
     <button style="cursor: pointer;"><i class="fas fa-search"></i></button>
@@ -92,7 +90,7 @@
             <div class="hero-content">
                 <h1 class="animate__animated animate__fadeInDown">Sensor Store</h1>
                 <p class="animate__animated animate__fadeInUp animate__delay-1s">
-                    جميع خدمات شحن الالعاب
+                   في مكان واحد جميع خدمات شحن الالعاب 
                 </p>
 
                 <img src="https://i.postimg.cc/1XVYmR4d/6e72287a36de96fb.png"
@@ -102,172 +100,60 @@
         </div>
     </section>
 
-  <section class="container categories-section raised-section" id="categoriesSection">
+<section class="categories-section raised-section" id="categoriesSection">
     
-    <style>
-        /* 1. تعديل الصورة عشان تملأ الكارت بالكامل */
-        .categories-section .cat-img {
-            width: 100%; /* تملأ عرض الكارت بالكامل */
-            height: 120px; /* ارتفاع ثابت عشان كل الكروت تبقى متساوية وشكلها متناسق */
-            object-fit: cover; /* بتخلي الصورة تغطي المساحة بالكامل بدون ما تتمطط */
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05); 
-            padding: 0; /* لغينا المسافات الداخلية عشان الصورة توصل للحواف */
-            border-radius: 15px; /* حواف دائرية للصورة */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            transition: all 0.3s ease;
-        }
 
-        /* 2. تنسيق النص العادي عشان يكون جاهز يتحول لشريط */
-        .categories-section .cat-card span {
-            font-family: 'El Messiri', sans-serif;
-            font-weight: 600;
-            display: inline-block; 
-            padding: 5px 15px;
-            border-radius: 20px; 
-            transition: all 0.3s ease;
-        }
-
-        /* 3. إلغاء خلفية الكارت نفسه لما يكون Active */
-        .categories-section .cat-card.active {
-            background: transparent !important;
-            border: none !important;
-            transform: translateY(-5px);
-        }
-
-        /* 4. تلوين الشريط اللي ورا الكلمة بس لما القسم يكون Active */
-        .categories-section .cat-card.active span {
-            background: linear-gradient(45deg, #6a1b9a, #8e24aa); 
-            color: white !important; 
-            box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4); 
-        }
-
-        /* تأثير لما العميل يقف بالماوس على القسم */
-        .categories-section .cat-card:hover .cat-img {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-        }
-        /* تنسيقات قسم ليه تشتري مننا */
-.why-us-section {
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
-
-.why-us-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.why-us-header h2 {
-    color: #ffffff; /* لون أبيض للنص */
-    font-family: 'El Messiri', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.why-us-header h2 i {
-    color: #bb86fc; /* لون بنفسجي للأيقونة */
-    margin-left: 10px;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.feature-box {
-    background: rgba(255, 255, 255, 0.03); /* خلفية زجاجية خفيفة */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 30px 20px;
-    text-align: center;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-}
-
-/* تأثير الإضاءة عند مرور الماوس */
-.feature-box:hover {
-    transform: translateY(-10px);
-    border-color: #6a1b9a;
-    box-shadow: 0 10px 30px rgba(106, 27, 154, 0.3);
-    background: rgba(106, 27, 154, 0.05);
-}
-
-.feature-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, rgba(106, 27, 154, 0.2), rgba(142, 36, 170, 0.2));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px auto;
-    color: #bb86fc;
-    font-size: 2rem;
-    transition: transform 0.4s ease;
-}
-
-.feature-box:hover .feature-icon-wrapper {
-    transform: scale(1.1) rotate(5deg);
-    background: linear-gradient(135deg, #6a1b9a, #8e24aa);
-    color: #ffffff;
-}
-
-.feature-title {
-    color: #ffffff;
-    font-family: 'El Messiri', sans-serif;
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.feature-desc {
-    color: #aaaaaa;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-    </style>
-
-    <div class="categories-wrapper">
-        <div class="cat-card active" onclick="filterByCategory('all')">
-            <img src="https://cdn-icons-png.flaticon.com/512/8673/8673628.png" alt="الكل" class="cat-img">
-            <span>الكل</span>
-        </div>
-
-        <div class="cat-card" onclick="filterByCategory('vbucks')">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202512/1008/7daacbf918af8a406ff57473a9bf9ed56b464cb6500b9b15.png" alt="The finals" class="cat-img">
-            <span>The finals</span>
-        </div>
-
-        <div class="cat-card" onclick="filterByCategory('pubg')">
-            <img src="https://static0.makeuseofimages.com/wordpress/wp-content/uploads/2023/08/how-to-link-your-epic-games-and-steam-accounts.jpg?w=1600&h=900&fit=crop" alt="PUBG" class="cat-img">
-            <span>حسابات</span>
-        </div>
-
-        <div class="cat-card" onclick="filterByCategory('playstation')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/512px-Playstation_logo_colour.svg.png" alt="PlayStation" class="cat-img">
-            <span> سوني</span>
-        </div>
-
-        <div class="cat-card" onclick="filterByCategory('cards')">
-            <img src="https://be.gamefinity.id/wp-content/uploads/2024/03/WhatsApp-Image-2024-03-08-at-70551-PM-1024x725.jpeg" alt="Gift Cards" class="cat-img">
-            <span> شحن</span>
-        </div>
-
-        <div class="cat-card" onclick="filterByCategory('xbox')">
-            <img src="https://play-lh.googleusercontent.com/hihXCV-0wxOXB5N7uBREaJeCVK0BDjNEBtKwNAncftZMflpEvasiKXn7vCKxu9qGpvk" alt="Xbox" class="cat-img">
-            <span>xbox</span>
-        </div>
+ <div class="categories-wrapper">
+    <div class="cat-card active" onclick="filterByCategory('all')">
+        <img src="https://cdn-icons-png.flaticon.com/512/8673/8673628.png" alt="الكل" class="cat-img">
+        <span>الكل</span>
     </div>
-    <div class="connected-gaming-divider"></div>
+
+    <div class="cat-card" onclick="filterByCategory('fast_charge')">
+        <img src="https://png.pngtree.com/element_our/png_detail/20180922/up-arrow-icon-design-vector-png_110236.jpg" alt="شحن فوري" class="cat-img">
+        <span>شحن فوري</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('accounts')">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064393.png" alt="حسابات" class="cat-img">
+        <span>حسابات</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('exchange')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp18SRfC82cS6OuUPo3UbzwxPR1jDo5qtewg&s" alt="نظام التبادل" class="cat-img">
+        <span>نظام التبادل</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('subscriptions')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2950/2950715.png" alt="اشتراكات" class="cat-img">
+        <span>اشتراكات</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('programming')">
+        <img src="https://img.freepik.com/free-vector/gradient-coding-logo-template_23-2148809439.jpg?semt=ais_hybrid&w=740&q=80" alt="خدمات البرمجة" class="cat-img" style="object-fit: contain; padding: 5px;">
+        <span>خدمات برمجة</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('steam')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" alt="Steam" class="cat-img" style="object-fit: contain; background: white; padding: 10px;">
+        <span>Steam</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('epic')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/512px-Epic_Games_logo.svg.png" alt="Epic" class="cat-img" style="object-fit: contain; background: white; padding: 10px;">
+        <span>Epic</span>
+    </div>
+
+    <div class="cat-card" onclick="filterByCategory('xbox')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/512px-Xbox_one_logo.svg.png" alt="Xbox" class="cat-img" style="object-fit: contain; background: white; padding: 10px;">
+        <span>Xbox</span>
+    </div>
+</div>
+
 </section>
-    <main class="container" id="mainContent">
-        <div class="products-grid" id="productsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
-        </div>
-    </main>
+<main class="container" id="mainContent">
+    <div id="productsContainer"></div>
+</main>
 
     <section id="checkoutSection" class="container hidden" style="margin-top: 40px; margin-bottom: 80px;">
         <div class="checkout-glass-card">
@@ -409,6 +295,23 @@
     </div>
 </section>
 
+<section class="container feedbacks-section" style="margin-top: 60px; margin-bottom: 60px;">
+    <div class="why-us-header" style="text-align: center; margin-bottom: 30px;">
+        <h2 style="font-family: 'El Messiri', sans-serif; color: white;"><i class="fas fa-star" style="color: #f1c40f;"></i> آراء عملائنا الأبطال</h2>
+        <p style="color: #888; margin-top: 10px; font-size: 1.1rem;">رأيك يهمنا وبيساعدنا نطور دايماً</p>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 30px;">
+        <button onclick="document.getElementById('feedbackModal').style.display='flex'" style="background: linear-gradient(135deg, #6a1b9a, #8e24aa); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-family: 'El Messiri', sans-serif; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4); transition: 0.3s;">
+            <i class="fas fa-comment-dots"></i> أضف تقييمك
+        </button>
+    </div>
+
+    <div id="feedbacksContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+        <p style="text-align:center; grid-column: 1/-1; color: #bb86fc;"><i class="fas fa-spinner fa-spin fa-2x"></i> جاري تحميل التقييمات...</p>
+    </div>
+</section>
+
 <footer class="site-footer" style="margin-top: 50px; position: relative; z-index: 50;">
         <div class="container">
             <div class="footer-grid">
@@ -500,8 +403,8 @@
                 <span>الإجمالي:</span>
                 <span id="cartTotal">0 ج.م</span>
             </div>
-<button class="btn-checkout" onclick="openCheckout()" style="font-family: 'El Messiri', sans-serif; font-size: 1.2rem; font-weight: bold; width: 100%; padding: 15px; background: linear-gradient(135deg, #6a1b9a, #8e24aa); color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);">
-    <i class="fas fa-lock" style="margin-left: 8px;"></i> إتمام الشراء
+<button class="btn-glass-action" onclick="openCheckout()">
+    <i class="fas fa-lock"></i> إتمام الشراء
 </button>
         </div>
     </div>
@@ -532,10 +435,43 @@
         </div>
     </div>
 
+
+    <div id="feedbackModal" class="modal">
+    <div class="modal-content" style="background: linear-gradient(145deg, #1a1a26, #12121c); border: 2px solid #6a1b9a; color: white;">
+        <span class="close-btn" onclick="document.getElementById('feedbackModal').style.display='none'" style="color: #aaa;">&times;</span>
+        <h3 style="margin-top: 0; margin-bottom: 20px; text-align: center;"><i class="fas fa-star" style="color:#f1c40f;"></i> سيب تقييمك</h3>
+        
+        <form id="feedbackForm" onsubmit="submitFeedback(event)">
+            <div style="margin-bottom: 15px;">
+                <input type="text" id="fbName" placeholder="اسمك / اسم حسابك" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(138, 43, 226, 0.3); background: rgba(10, 10, 15, 0.6); color: white; font-family: 'El Messiri', sans-serif;">
+            </div>
+            
+            <div style="margin-bottom: 15px; text-align: center; direction: ltr;">
+                <label style="display: block; margin-bottom: 10px; color: #ccc;">تقييمك من 5</label>
+                <select id="fbRating" required style="padding: 10px; border-radius: 10px; background: rgba(10, 10, 15, 0.6); color: white; border: 1px solid rgba(138, 43, 226, 0.3);">
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <textarea id="fbComment" placeholder="رأيك في خدمتنا..." required rows="3" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(138, 43, 226, 0.3); background: rgba(10, 10, 15, 0.6); color: white; font-family: 'El Messiri', sans-serif; resize: none;"></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmitFb" style="width: 100%; padding: 12px; border-radius: 10px; border: none; background: linear-gradient(135deg, #6a1b9a, #8e24aa); color: white; font-size: 1.1rem; font-family: 'El Messiri', sans-serif; cursor: pointer;">
+                نشر التقييم <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
     <div id="aiWizardModal" class="modal">
         <div class="modal-content" style="text-align: center;">
             <span class="close-btn" onclick="closeModals()">&times;</span>
-            <h3 style="color: #6a1b9a;"><i class="fas fa-robot"></i> مساعد Sensor الذكي</h3>
+            <h3 style="color: #6a1b9a;"><i class="fas fa-robot"></i> شات Sensor </h3>
             
             <div id="step1" class="wizard-step active">
                 <p>إيه اللي بتدور عليه النهاردة؟</p>
@@ -565,7 +501,7 @@
 <script type="module">
     // 1. استيراد مكتبات Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
     // 2. إعدادات Firebase الخاصة بك
     const firebaseConfig = {
@@ -589,164 +525,235 @@
 
     // --- وظائف المتجر (مربوطة بـ window لتظهر للأزرار) ---
 
-    // جلب المنتجات من Firebase
-    async function fetchProducts() {
-        const container = document.getElementById('productsContainer');
-        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--primary-purple);"><i class="fas fa-spinner fa-spin fa-2x"></i> جاري تحميل المنتجات...</p>';
-        
-        try {
-            const querySnapshot = await getDocs(collection(db, "products"));
-            products = [];
-            querySnapshot.forEach((doc) => {
-                products.push({ id: doc.id, ...doc.data() });
-            });
-            window.renderProducts(products);
-            window.updateCartUI();
-        } catch (error) {
-            console.error("Error: ", error);
-            container.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">تعذر تحميل المنتجات حالياً.</p>';
-        }
+    // قاموس بأسماء الأقسام عشان نعرض عناوين شيك بالعربي
+const categoryNames = {
+    'fast_charge': '<i class="fas fa-bolt" style="color: #f1c40f;"></i> شحن فوري',
+    'accounts': '<i class="fas fa-gamepad" style="color: #bb86fc;"></i> حسابات',
+    'exchange': '<i class="fas fa-exchange-alt" style="color: #4caf50;"></i> نظام التبادل',
+    'subscriptions': '<i class="fas fa-crown" style="color: #ff9800;"></i> اشتراكات',
+    'programming': '<i class="fas fa-laptop-code" style="color: #00e5ff;"></i> خدمات برمجة',
+    'steam': '<i class="fab fa-steam" style="color: #ffffff;"></i> Steam',
+    'epic': '<i class="fas fa-cube" style="color: #ffffff;"></i> Epic Games',
+    'xbox': '<i class="fab fa-xbox" style="color: #107C10;"></i> Xbox',
+    'vbucks': '<i class="fas fa-coins" style="color: #00e5ff;"></i> شدات فورت نايت',
+    'pubg': '<i class="fas fa-crosshairs" style="color: #ff9800;"></i> حسابات ببجي',
+    'other': '<i class="fas fa-layer-group" style="color: #bb86fc;"></i> منتجات متنوعة'
+};
+
+// جلب المنتجات من Firebase
+async function fetchProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = '<p style="text-align:center; color: var(--primary-purple); margin-top: 50px; width: 100%;"><i class="fas fa-spinner fa-spin fa-2x"></i> جاري تحميل المنتجات...</p>';
+    
+    try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        products = [];
+        querySnapshot.forEach((doc) => {
+            products.push({ id: doc.id, ...doc.data() });
+        });
+        // تفعيل التقسيم الافتراضي
+        window.renderProducts(products, true);
+        window.updateCartUI();
+    } catch (error) {
+        console.error("Error: ", error);
+        container.innerHTML = '<p style="text-align:center; color: #ff4757; margin-top: 50px; width: 100%;">تعذر تحميل المنتجات حالياً. تأكد من اتصالك بالإنترنت.</p>';
+    }
+}
+
+window.renderProducts = function(items, groupByCategory = false) {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = '';
+
+    if (items.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 20px; width: 100%;">لا توجد منتجات.</p>';
+        return;
     }
 
-    window.renderProducts = function(items) {
-        const container = document.getElementById('productsContainer');
-        container.innerHTML = '';
-        if (items.length === 0) {
-            container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 20px;">لا توجد منتجات.</p>';
-            return;
-        }
-        items.forEach(p => {
-            const inWishlist = wishlist.find(w => w.id === p.id);
-            const heartColor = inWishlist ? '#ff4757' : '#ccc';
-            container.innerHTML += `
-                <div class="product-card" style="padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <i class="fas fa-heart" onclick="toggleWishlist('${p.id}')" style="position: absolute; top: 15px; left: 15px; font-size: 1.2rem; cursor: pointer; color: ${heartColor}; z-index: 10;"></i>
-                   <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 160px; object-fit: contain; margin-bottom: 15px; margin-top: 10px; border-radius: 8px;">
-                    <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-light);">${p.name}</h3>
-                    <p style="color: var(--primary-purple-light); font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">${p.price} ج.م</p>
-<button onclick="addToCart('${p.id}')" style="font-family: 'El Messiri', sans-serif; font-size: 1.1rem; width: 100%; background: var(--gradient-primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s;">
-    <i class="fas fa-cart-plus"></i> أضف للسلة
-</button>
-                </div>`;
-        });
-    };
-
-    window.addToCart = function(id) {
-        const product = products.find(p => p.id === id);
-        cart.push(product);
-        localStorage.setItem('sensorCart', JSON.stringify(cart));
-        window.updateCartUI();
-        window.showToast(`تم إضافة ${product.name} للسلة`);
+    // دالة لبناء كارت المنتج
+// دالة لبناء كارت المنتج
+    const generateProductHTML = (p) => {
+        // التأكد من وجود wishlist لو مش متعرفة بشكل عام عشان ميعملش إيرور
+        const inWishlist = (typeof wishlist !== 'undefined' ? wishlist : []).find(w => w.id === p.id);
+        const heartColor = inWishlist ? '#ff4757' : '#ccc';
         
-        // فيدباك
-        if (navigator.vibrate) navigator.vibrate(50);
-        confetti({ particleCount: 40, spread: 60, origin: { y: 0.9 }, colors: ['#bb86fc', '#64b5f6'] });
+        // --- الجزء الجديد الخاص باللغة والعملة ---
+        const finalPrice = getFormattedPrice(p.price);
+        // بنستخدم المتغيرات اللي عرفناها فوق
+        const currentCurrency = typeof currencySymbol !== 'undefined' ? currencySymbol : 'ج.م';
+        const btnText = typeof addToCartText !== 'undefined' ? addToCartText : 'أضف للسلة';
+
+        return `
+            <div class="product-card" style="padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <i class="fas fa-heart" onclick="toggleWishlist('${p.id}')" style="position: absolute; top: 15px; left: 15px; font-size: 1.2rem; cursor: pointer; color: ${heartColor}; z-index: 10;"></i>
+                <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 160px; object-fit: contain; margin-bottom: 15px; margin-top: 10px; border-radius: 8px;">
+                
+                <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-light);">${p.name}</h3>
+                <p style="color: var(--primary-purple-light); font-weight: bold; font-size: 1.3rem; margin-bottom: 15px; direction: ltr;">${finalPrice} ${currentCurrency}</p>
+                <button onclick="addToCart('${p.id}')" class="btn-glass-action" style="font-size: 1.1rem; padding: 12px;">
+                    <i class="fas fa-cart-plus"></i> ${btnText}
+                </button>
+
+            </div>`;
     };
 
-    window.updateCartUI = function() {
-        const container = document.getElementById('cartItemsContainer');
-        let total = 0;
-        container.innerHTML = '';
-        cart.forEach((item, index) => {
-            total += Number(item.price);
-            container.innerHTML += `
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                    <img src="${item.image}" style="width: 40px; height: 40px; object-fit: contain;">
-                    <div style="flex: 1; margin: 0 10px;">
-                        <h4 style="margin: 0; font-size: 0.9rem; color: var(--text-light);">${item.name}</h4>
-                        <span style="color: var(--primary-purple-light); font-weight: bold;">${item.price} ج.م</span>
-                    </div>
-                    <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #ff4757; cursor: pointer;"><i class="fas fa-trash"></i></button>
-                </div>`;
+    if (groupByCategory) {
+        // تجميع المنتجات حسب القسم
+        const grouped = {};
+        items.forEach(p => {
+            const cat = p.category || 'other';
+            if (!grouped[cat]) grouped[cat] = [];
+            grouped[cat].push(p);
         });
-        document.getElementById('cartTotal').innerText = total + ' ج.م';
-        document.getElementById('cartBadge').innerText = cart.length;
-        document.getElementById('mobileBadge').innerText = cart.length;
-        document.getElementById('mobileBadge').style.display = cart.length > 0 ? 'flex' : 'none';
-    };
 
-    window.removeFromCart = function(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('sensorCart', JSON.stringify(cart));
-        window.updateCartUI();
-    };
-
-    window.sendOrderToWhatsapp = async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('btnConfirm');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل طلبك...';
-        btn.disabled = true;
-
-        const orderData = {
-            customerName: document.getElementById('custName').value,
-            phone: document.getElementById('custPhone').value,
-            email: document.getElementById('custEmail').value,
-            paymentMethod: document.getElementById('paymentMethod').value,
-            transferInfo: document.getElementById('transferInfo').value,
-            items: cart,
-            total: cart.reduce((s, i) => s + Number(i.price), 0),
-            createdAt: serverTimestamp()
-        };
-
-        try {
-            await addDoc(collection(db, "orders"), orderData);
+        // رسم الأقسام
+        for (const cat in grouped) {
+            const catTitle = categoryNames[cat] || cat;
+            const catProducts = grouped[cat].map(generateProductHTML).join('');
             
-            // احتفال
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            
-            let itemsMsg = cart.map(i => `- ${i.name}`).join('%0A');
-            let msg = `طلب جديد من: ${orderData.customerName}%0Aالمنتجات:%0A${itemsMsg}%0Aالإجمالي: ${orderData.total} ج.م`;
-            
-            setTimeout(() => {
-                window.open(`https://wa.me/201012345678?text=${msg}`, '_blank');
-                cart = [];
-                localStorage.setItem('sensorCart', "[]");
-                window.location.reload();
-            }, 1500);
-        } catch (err) {
-            alert("خطأ في الشبكة، حاول لاحقاً");
-            btn.disabled = false;
-            btn.innerText = "تأكيد وإرسال الإيصال";
+            container.innerHTML += `
+                <div class="category-group" style="margin-bottom: 50px; width: 100%;">
+                    <h2 style="color: var(--text-bright); font-family: 'El Messiri', sans-serif; font-size: 1.6rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid rgba(138, 43, 226, 0.3); padding-bottom: 10px;">
+                        <i class="fas fa-layer-group" style="color: var(--epic-purple);"></i> ${catTitle}
+                    </h2>
+                    <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                        ${catProducts}
+                    </div>
+                </div>
+            `;
         }
+    } else {
+        // العرض العادي بدون تقسيم
+        const productsHTML = items.map(generateProductHTML).join('');
+        container.innerHTML = `
+            <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%;">
+                ${productsHTML}
+            </div>
+        `;
+    }
+};
+
+window.addToCart = function(id) {
+    const product = products.find(p => p.id === id);
+    cart.push(product);
+    localStorage.setItem('sensorCart', JSON.stringify(cart));
+    window.updateCartUI();
+    window.showToast(`تم إضافة ${product.name} للسلة`);
+    
+    // فيدباك
+    if (navigator.vibrate) navigator.vibrate(50);
+    confetti({ particleCount: 40, spread: 60, origin: { y: 0.9 }, colors: ['#bb86fc', '#64b5f6'] });
+};
+
+window.updateCartUI = function() {
+    const container = document.getElementById('cartItemsContainer');
+    let totalNativePrice = 0;
+    container.innerHTML = '';
+    
+    cart.forEach((item, index) => {
+        totalNativePrice += Number(item.price);
+        container.innerHTML += `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                <img src="${item.image}" style="width: 40px; height: 40px; object-fit: contain;">
+                <div style="flex: 1; margin: 0 10px;">
+                    <h4 style="margin: 0; font-size: 0.9rem; color: var(--text-light);">${item.name}</h4>
+                    <span style="color: var(--primary-purple-light); font-weight: bold; direction: ltr; display:inline-block;">${getFormattedPrice(item.price)} ${currencySymbol}</span>
+                </div>
+                <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #ff4757; cursor: pointer;"><i class="fas fa-trash"></i></button>
+            </div>`;
+    });
+    
+    document.getElementById('cartTotal').innerText = getFormattedPrice(totalNativePrice) + ' ' + currencySymbol;
+    document.getElementById('cartBadge').innerText = cart.length;
+    document.getElementById('mobileBadge').innerText = cart.length;
+    document.getElementById('mobileBadge').style.display = cart.length > 0 ? 'flex' : 'none';
+};
+
+window.removeFromCart = function(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('sensorCart', JSON.stringify(cart));
+    window.updateCartUI();
+};
+
+window.sendOrderToWhatsapp = async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnConfirm');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل طلبك...';
+    btn.disabled = true;
+
+    const orderData = {
+        customerName: document.getElementById('custName').value,
+        phone: document.getElementById('custPhone').value,
+        email: document.getElementById('custEmail').value,
+        paymentMethod: document.getElementById('paymentMethod').value,
+        transferInfo: document.getElementById('transferInfo').value,
+        items: cart,
+        total: cart.reduce((s, i) => s + Number(i.price), 0),
+        createdAt: serverTimestamp()
     };
 
-    // باقي دوال التحكم في الواجهة (Navigation)
-    window.openCart = () => { document.getElementById('cartSidebar').style.right = '0'; document.getElementById('overlay').style.display = 'block'; };
-    window.closeCart = () => { document.getElementById('cartSidebar').style.right = '-400px'; document.getElementById('overlay').style.display = 'none'; };
-    window.closeModals = () => { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); document.getElementById('overlay').style.display = 'none'; };
-    window.goHome = () => { window.location.reload(); };
-    window.openCheckout = () => {
-        if(cart.length === 0) return alert("السلة فارغة");
-        window.closeCart();
-        document.getElementById('heroSection').style.display = 'none';
-        document.getElementById('categoriesSection').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'none';
-        document.getElementById('checkoutSection').classList.remove('hidden');
-        document.getElementById('finalTotalAmount').innerText = document.getElementById('cartTotal').innerText;
-    };
+    try {
+        await addDoc(collection(db, "orders"), orderData);
+        
+        // احتفال
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        
+        let itemsMsg = cart.map(i => `- ${i.name}`).join('%0A');
+        let msg = `طلب جديد من: ${orderData.customerName}%0Aالمنتجات:%0A${itemsMsg}%0Aالإجمالي: ${orderData.total} ج.م`;
+        
+        setTimeout(() => {
+            window.open(`https://wa.me/201012345678?text=${msg}`, '_blank');
+            cart = [];
+            localStorage.setItem('sensorCart', "[]");
+            window.location.reload();
+        }, 1500);
+    } catch (err) {
+        alert("خطأ في الشبكة، حاول لاحقاً");
+        btn.disabled = false;
+        btn.innerText = "تأكيد وإرسال الإيصال";
+    }
+};
+// تشغيل إعدادات المنطقة عند فتح الصفحة
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('regionSelect').value = currentRegion;
+    if (currentRegion === 'global') {
+        document.documentElement.dir = 'ltr'; // قلب الموقع إنجليزي
+        document.documentElement.lang = 'en';
+        document.getElementById('searchInput').placeholder = translations.global.searchPlaceholder || 'Search...';
+    }
+});
+// باقي دوال التحكم في الواجهة (Navigation)
+window.openCart = () => { document.getElementById('cartSidebar').style.right = '0'; document.getElementById('overlay').style.display = 'block'; };
+window.closeCart = () => { document.getElementById('cartSidebar').style.right = '-400px'; document.getElementById('overlay').style.display = 'none'; };
+window.closeModals = () => { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); document.getElementById('overlay').style.display = 'none'; };
+window.goHome = () => { window.location.reload(); };
+window.openCheckout = () => {
+    if(cart.length === 0) return alert("السلة فارغة");
+    window.closeCart();
+    document.getElementById('heroSection').style.display = 'none';
+    document.getElementById('categoriesSection').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('checkoutSection').classList.remove('hidden');
+    document.getElementById('finalTotalAmount').innerText = document.getElementById('cartTotal').innerText;
+};
 
-    window.showToast = (msg) => {
-        const t = document.getElementById('toast');
-        document.getElementById('toastMessage').innerText = msg;
-        t.style.display = 'block';
-        setTimeout(() => t.style.display = 'none', 3000);
-    };
+window.showToast = (msg) => {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMessage').innerText = msg;
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 3000);
+};
 
-    // تشغيل جلب المنتجات عند البداية
-    fetchProducts();
+// تشغيل جلب المنتجات عند البداية
+fetchProducts();
+
 window.updatePaymentInstructions = function() {
-    // تحديد العناصر المطلوبة من الصفحة
     const paymentMethod = document.getElementById("paymentMethod").value;
     const instructionBox = document.getElementById("paymentInstructions");
     const payText = document.getElementById("payText");
-    
-    // سحب إجمالي المبلغ من الفاتورة
     const totalAmount = document.getElementById("finalTotalAmount").innerText;
 
-    // إظهار صندوق التعليمات
     instructionBox.classList.remove("hidden");
 
-    // تغيير النص بناءً على وسيلة الدفع المختارة مع إضافة المبلغ
     if (paymentMethod === "vodafone") {
         payText.innerHTML = `يرجى تحويل مبلغ <strong style="color: var(--primary-purple); font-size: 1.2rem;">${totalAmount}</strong> على رقم فودافون كاش التالي:<br><strong style='font-size: 1.3rem; color: #e60000; letter-spacing: 2px;'>01020717500</strong><br>ثم اكتب الرقم الذي قمت بالتحويل منه بالأسفل.`;
     } 
@@ -760,39 +767,31 @@ window.updatePaymentInstructions = function() {
         payText.innerHTML = `سيتم تحويلك إلى صفحة الدفع الآمن لدفع مبلغ <strong style="color: var(--primary-purple); font-size: 1.2rem;">${totalAmount}</strong> بعد التأكيد.`;
     }
     else {
-        // إخفاء الصندوق إذا لم يتم اختيار شيء
         instructionBox.classList.add("hidden");
     }
 };
 
 window.filterByCategory = function(category) {
-    // 1. إزالة تأثير (Active) من كل الأقسام
     const allCards = document.querySelectorAll('.cat-card');
     allCards.forEach(card => card.classList.remove('active'));
 
-    // 2. إضافة تأثير (Active) للقسم اللي تم اختياره
     const clickedCard = Array.from(allCards).find(card => card.getAttribute('onclick').includes(category));
     if (clickedCard) {
         clickedCard.classList.add('active');
     }
 
-    // 3. فلترة المنتجات وعرضها
     const container = document.getElementById('productsContainer');
     
     if (category === 'all') {
-        // لو اختار "الكل"، اعرض كل المنتجات
-        window.renderProducts(products);
+        window.renderProducts(products, true); // إرسال true لتفعيل التقسيم
     } else {
-        // فلترة المنتجات بناءً على القسم المختار
         const filteredProducts = products.filter(p => p.category === category);
         
-        // عرض المنتجات اللي اتفلترت
         if (filteredProducts.length > 0) {
-            window.renderProducts(filteredProducts);
+            window.renderProducts(filteredProducts, false); // إرسال false للعرض العادي
         } else {
-            // رسالة لو القسم لسه مفيهوش منتجات
             container.innerHTML = `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px dashed var(--border-color);">
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px dashed var(--border-color); width: 100%;">
                     <i class="fas fa-box-open" style="font-size: 3rem; color: #666; margin-bottom: 15px;"></i>
                     <h3 style="color: var(--text-light);">لا توجد منتجات في هذا القسم حالياً</h3>
                     <p style="color: #888; margin-top: 10px;">سيتم إضافة منتجات أسطورية قريباً!</p>
@@ -881,6 +880,186 @@ window.searchProducts = function() {
     }
 };
 
+// ================= وظائف التقييمات (Feedbacks) =================
+
+// 1. جلب وعرض التقييمات
+async function fetchFeedbacks() {
+    const container = document.getElementById('feedbacksContainer');
+    try {
+        const q = query(collection(db, "feedbacks"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        container.innerHTML = '';
+        
+        if (querySnapshot.empty) {
+            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">كن أول من يكتب تقييماً!</p>';
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const fb = doc.data();
+            const stars = '⭐'.repeat(Number(fb.rating));
+            const date = fb.createdAt ? new Date(fb.createdAt.toDate()).toLocaleDateString('ar-EG') : 'الآن';
+
+            container.innerHTML += `
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(138, 43, 226, 0.2); padding: 20px; border-radius: 15px; backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h4 style="color: white; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-user-circle" style="color: #bb86fc; font-size: 1.5rem;"></i> ${fb.name}
+                        </h4>
+                        <span style="direction: ltr; font-size: 0.9rem;">${stars}</span>
+                    </div>
+                    <p style="color: #ccc; font-size: 0.95rem; margin-bottom: 10px; line-height: 1.6;">"${fb.comment}"</p>
+                    <span style="font-size: 0.75rem; color: #666;"><i class="far fa-clock"></i> ${date}</span>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Error fetching feedbacks: ", error);
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #ff4757;">تعذر تحميل التقييمات.</p>';
+    }
+}
+
+// 2. إرسال تقييم جديد
+window.submitFeedback = async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnSubmitFb');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري النشر...';
+    btn.disabled = true;
+
+    const feedbackData = {
+        name: document.getElementById('fbName').value,
+        rating: document.getElementById('fbRating').value,
+        comment: document.getElementById('fbComment').value,
+        createdAt: serverTimestamp()
+    };
+
+    try {
+        await addDoc(collection(db, "feedbacks"), feedbackData);
+        document.getElementById('feedbackModal').style.display = 'none';
+        window.showToast("شكراً لتقييمك! 💖");
+        document.getElementById('feedbackForm').reset();
+        fetchFeedbacks(); // تحديث القائمة فوراً
+    } catch (err) {
+        alert("حدث خطأ أثناء إرسال التقييم، جرب تاني.");
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+};
+
+// تشغيل جلب التقييمات عند فتح الصفحة
+fetchFeedbacks();
+
+</script>
+<script>
+    // ================= إعدادات اللغة والمنطقة (Region) =================
+// ================= إعدادات المنطقة واللغة والعملة =================
+const EXCHANGE_RATE = 50; // سعر الدولار مقابل الجنيه (تقدر تعدله براحتك)
+let currentRegion = localStorage.getItem('sensorRegion') || 'eg';
+
+window.changeRegion = function(region) {
+    localStorage.setItem('sensorRegion', region);
+    window.location.reload(); 
+};
+
+function getFormattedPrice(price) {
+    return currentRegion === 'global' ? (price / EXCHANGE_RATE).toFixed(2) : price;
+}
+
+const currencySymbol = currentRegion === 'global' ? '$' : 'ج.م';
+const addToCartText = currentRegion === 'global' ? 'Add to Cart' : 'أضف للسلة';
+
+// قاموس الأقسام الدايناميك
+const categoryNames = {
+    'fast_charge': currentRegion === 'global' ? '<i class="fas fa-bolt" style="color: #f1c40f;"></i> Fast Charge' : '<i class="fas fa-bolt" style="color: #f1c40f;"></i> شحن فوري',
+    'accounts': currentRegion === 'global' ? '<i class="fas fa-gamepad" style="color: #bb86fc;"></i> Accounts' : '<i class="fas fa-gamepad" style="color: #bb86fc;"></i> حسابات',
+    'exchange': currentRegion === 'global' ? '<i class="fas fa-exchange-alt" style="color: #4caf50;"></i> Exchange' : '<i class="fas fa-exchange-alt" style="color: #4caf50;"></i> نظام التبادل',
+    'subscriptions': currentRegion === 'global' ? '<i class="fas fa-crown" style="color: #ff9800;"></i> Subscriptions' : '<i class="fas fa-crown" style="color: #ff9800;"></i> اشتراكات',
+    'programming': currentRegion === 'global' ? '<i class="fas fa-laptop-code" style="color: #00e5ff;"></i> Programming' : '<i class="fas fa-laptop-code" style="color: #00e5ff;"></i> خدمات برمجة',
+    'steam': '<i class="fab fa-steam" style="color: #ffffff;"></i> Steam',
+    'epic': '<i class="fas fa-cube" style="color: #ffffff;"></i> Epic Games',
+    'xbox': '<i class="fab fa-xbox" style="color: #107C10;"></i> Xbox',
+    'vbucks': currentRegion === 'global' ? '<i class="fas fa-coins" style="color: #00e5ff;"></i> V-Bucks' : '<i class="fas fa-coins" style="color: #00e5ff;"></i> شدات فورت نايت',
+    'pubg': currentRegion === 'global' ? '<i class="fas fa-crosshairs" style="color: #ff9800;"></i> PUBG Accounts' : '<i class="fas fa-crosshairs" style="color: #ff9800;"></i> حسابات ببجي',
+    'other': currentRegion === 'global' ? '<i class="fas fa-layer-group" style="color: #bb86fc;"></i> Other' : '<i class="fas fa-layer-group" style="color: #bb86fc;"></i> منتجات متنوعة'
+};
+
+// قاموس الترجمة السحري للنصوص الثابتة
+const enDictionary = {
+    "في مكان واحد جميع خدمات شحن الالعاب": "All game top-up services in one place",
+    "الرئيسية": "Home", "ابحث عن منتج...": "Search products...", "جميع خدمات شحن الالعاب": "Premium Game Top-up Services",
+    "الكل": "All", "شحن فوري": "Fast Charge", "حسابات": "Accounts", "نظام التبادل": "Exchange", "اشتراكات": "Subscriptions", "خدمات برمجة": "Programming",
+    "بيانات الطلب والتأكيد": "Order Details", "الاسم": "Full Name", "اكتب اسمك هنا..": "Enter your name..",
+    "رقم الواتساب الخاص بك": "WhatsApp Number", "البريد الإلكتروني (لاستلام البيانات)": "Email Address",
+    "اختر طريقة الدفع": "Payment Method", "-- اختر طريقة الدفع --": "-- Select Method --",
+    "فودافون كاش": "Vodafone Cash", "إنستا باي (InstaPay)": "InstaPay", "باي بال (PayPal)": "PayPal", "فيزا / ماستركارد": "Visa / MasterCard",
+    "الرقم المحول منه / أو إيميل الحساب (للتأكيد)": "Transfer Number / Email", "رقمك أو إيميلك اللي حولت منه...": "Your number or email...",
+    "تأكيد وإرسال الطلب": "Confirm Order", "ملخص الفاتورة": "Order Summary", "الإجمالي:": "Total:", "الإجمالي": "Total", "السعر النهائي": "Final Price",
+    "طلبك آمن ومحمي": "Secure & Protected Order", "ليه تشتري من Sensor Store؟": "Why choose Sensor Store?",
+    "وفرنالك أفضل تجربة شراء في عالم الجيمنج": "The best gaming shopping experience.", "تسليم فوري ومباشر": "Instant Delivery",
+    "بمجرد إتمام الدفع، هتستلم طلبك سواء (شدات، حسابات، أو بطايق) في أقل من 5 دقايق بدون أي تأخير.": "Get your orders in under 5 mins after payment.",
+    "دفع آمن 100%": "100% Secure Payment", "بنوفرلك طرق دفع متعددة (محافظ إلكترونية، إنستاباي، فيزا) عبر بوابات مشفرة وآمنة تماماً لحماية بياناتك.": "Encrypted payment methods to protect your data.",
+    "دعم فني 24/7": "24/7 Support", "فريق الدعم بتاعنا متواجد على مدار الساعة عشان يحللك أي مشكلة أو يجاوب على استفساراتك فوراً.": "Our support team is available around the clock.",
+    "أفضل الأسعار": "Best Prices", "بنضمنلك أرخص الأسعار في السوق مع عروض وخصومات حصرية ومستمرة للاعبين المميزين.": "We guarantee the cheapest prices with exclusive discounts.",
+    "روابط سريعة": "Quick Links", "سلة المشتريات": "Shopping Cart", "سياسات المتجر": "Store Policies", "شروط الاستخدام": "Terms of Use",
+    "سياسة الخصوصية": "Privacy Policy", "سياسة الاسترجاع": "Refund Policy", "الأسئلة الشائعة": "FAQs", "تابعنا على": "Follow Us",
+    "طرق الدفع المدعومة": "Payment Methods", "السلة": "Cart", "المفضلة": "Wishlist", "حسابي": "Account", "مساعد Sensor": "Sensor AI",
+    "آراء عملائنا الأبطال": "Customer Reviews", "رأيك يهمنا وبيساعدنا نطور دايماً": "Your feedback helps us improve.",
+    "أضف تقييمك": "Add Review", "آراء العملاء": "Reviews", "سيب تقييمك": "Leave a Review", "اسمك / اسم حسابك": "Name / Account",
+    "تقييمك من 5": "Rating out of 5", "رأيك في خدمتنا...": "Your feedback...", "نشر التقييم": "Submit Review", "إتمام الشراء": "Checkout",
+    "جاري تحميل المنتجات...": "Loading products...", "لا توجد منتجات.": "No products found.", "جميع الحقوق محفوظة": "All Rights Reserved"
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('regionSelect').value = currentRegion;
+    
+    // سحر الترجمة: لو أجنبي، هنغير كل النصوص والاتجاهات
+    if (currentRegion === 'global') {
+        document.documentElement.dir = 'ltr';
+        document.documentElement.lang = 'en';
+        document.body.style.fontFamily = "'Segoe UI', Roboto, sans-serif";
+        
+        // تظبيط أماكن الأيقونات عشان تناسب الانجليزي LTR
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .search-box input { padding: 12px 45px 12px 15px; }
+                .search-box button { right: 15px; left: auto; }
+                .input-icon { left: 15px; right: auto; }
+                .input-wrapper input, .input-wrapper select, .input-wrapper textarea { padding: 14px 15px 14px 45px; }
+                .close-btn { right: 20px; left: auto; }
+                .fb-card { direction: ltr; }
+            </style>
+        `);
+
+        // دالة تبديل الكلمات
+        const walkDOM = (node) => {
+            if (node.nodeType === 3) {
+                let text = node.nodeValue.trim();
+                if (text && enDictionary[text]) { node.nodeValue = node.nodeValue.replace(text, enDictionary[text]); }
+            } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                if (node.placeholder && enDictionary[node.placeholder]) { node.placeholder = enDictionary[node.placeholder]; }
+                for (let child of node.childNodes) walkDOM(child);
+            }
+        };
+        walkDOM(document.body);
+    }
+});
+
+// دالة حساب السعر حسب المنطقة
+function getFormattedPrice(priceEGP) {
+    if (currentRegion === 'global') {
+        return (priceEGP / EXCHANGE_RATE).toFixed(2); // بيقسم على 50 ويقرب لرقمين عشريين
+    }
+    return priceEGP;
+}
+
+// دالة تغيير المنطقة
+window.changeRegion = function(region) {
+    localStorage.setItem('sensorRegion', region);
+    window.location.reload(); // بنعمل ريفرش عشان نطبق اللغة والأسعار الجديدة
+};
 </script>
 
 <div id="orderSuccessOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; flex-direction: column; color: white; text-align: center; backdrop-filter: blur(8px);">
